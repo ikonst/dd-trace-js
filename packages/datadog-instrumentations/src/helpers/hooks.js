@@ -36,6 +36,7 @@ module.exports = {
   'dns': () => require('../dns'),
   'elasticsearch': () => require('../elasticsearch'),
   'express': () => require('../express'),
+  'express-mongo-sanitize': () => require('../express-mongo-sanitize'),
   'fastify': () => require('../fastify'),
   'find-my-way': () => require('../find-my-way'),
   'fs': () => require('../fs'),
