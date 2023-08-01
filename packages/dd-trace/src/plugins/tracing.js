@@ -55,7 +55,23 @@ class TracingPlugin extends Plugin {
   start () {} // implemented by individual plugins
 
   finish () {
-    this.activeSpan?.finish()
+    const span = this.activeSpan
+    if (span) {
+      this.tagBaseService(span)
+      span.finish()
+    }
+  }
+
+  tagBaseService (span) {
+    /**
+     * The `service` span object attribute is set at the span_processor:process
+     * step, so we need to catch it in the span context, where it's set as
+     * `service.name` in tags.
+     */
+    const serviceName = span.context()._tags['service.name']
+    if (serviceName !== this._tracerConfig.service) {
+      span.setTag('_dd.base_service', this._tracerConfig.service)
+    }
   }
 
   error (error) {

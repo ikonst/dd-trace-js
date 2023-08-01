@@ -25,4 +25,12 @@ describe('TracingPlugin', () => {
       )
     })
   })
+
+  describe('tagBaseService', () => {
+    it('should set _dd.base_service when service is changed', () => {
+
+    })
+    it('should not set _dd.base_service when service is unchanged', () => {})
+    it('should do nothing if service name flattening is not enabled', () => {})
+  })
 })
