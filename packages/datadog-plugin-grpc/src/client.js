@@ -81,6 +81,7 @@ class GrpcClientPlugin extends ClientPlugin {
     }
 
     this.tagPeerService(span)
+    this.tagBaseService(span)
     span.finish()
   }
 

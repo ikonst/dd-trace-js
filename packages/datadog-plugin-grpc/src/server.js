@@ -84,6 +84,8 @@ class GrpcServerPlugin extends ServerPlugin {
       addMetadataTags(span, trailer, metadataFilter, 'response')
     }
 
+    this.tagBaseService(span)
+
     span.finish()
   }
 

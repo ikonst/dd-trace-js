@@ -113,6 +113,7 @@ describe('Plugin', () => {
                 resource: '/test.TestService/getUnary',
                 type: 'web'
               })
+              expect(traces[0][0].meta).not.to.have.property('_dd.base_service')
               expect(traces[0][0].meta).to.have.property('grpc.method.name', 'getUnary')
               expect(traces[0][0].meta).to.have.property('grpc.method.service', 'TestService')
               expect(traces[0][0].meta).to.have.property('grpc.method.package', 'test')
@@ -390,6 +391,7 @@ describe('Plugin', () => {
               expect(traces[0][0]).to.deep.include({
                 service: 'custom'
               })
+              expect(traces[0][0].meta).to.have.property('_dd.base_service', 'test')
             })
         })
       })

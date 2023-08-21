@@ -140,6 +140,8 @@ describe('Plugin', () => {
                     type: 'http'
                   })
 
+                  expect(traces[0][0].meta).not.to.have.property('_dd.base_service')
+
                   expect(traces[0][0].meta).to.include({
                     'grpc.method.name': 'getUnary',
                     'grpc.method.service': 'TestService',
@@ -524,6 +526,7 @@ describe('Plugin', () => {
                   expect(traces[0][0]).to.deep.include({
                     service: 'custom'
                   })
+                  expect(traces[0][0].meta).to.have.property('_dd.base_service', 'test')
                 })
             })
           })
