@@ -93,6 +93,7 @@ class HttpClientPlugin extends ClientPlugin {
     this.config.hooks.request(span, req, res)
 
     this.tagPeerService(span)
+    this.tagBaseService(span)
 
     span.finish()
   }
