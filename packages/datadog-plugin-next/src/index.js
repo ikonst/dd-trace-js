@@ -64,6 +64,8 @@ class NextPlugin extends ServerPlugin {
 
     this.config.hooks.request(span, req, res)
 
+    this.tagBaseService(span)
+
     span.finish()
   }
 

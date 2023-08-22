@@ -152,6 +152,7 @@ describe('Plugin', function () {
                 expect(spans[1]).to.have.property('service', 'test')
                 expect(spans[1]).to.have.property('type', 'web')
                 expect(spans[1]).to.have.property('resource', 'GET /api/hello/[name]')
+                expect(spans[1].meta).not.to.have.property('_dd.base_service')
                 expect(spans[1].meta).to.have.property('span.kind', 'server')
                 expect(spans[1].meta).to.have.property('http.method', 'GET')
                 expect(spans[1].meta).to.have.property('http.status_code', '200')
@@ -391,10 +392,11 @@ describe('Plugin', function () {
               const spans = traces[0]
 
               expect(spans[1]).to.have.property('name', 'next.request')
-              expect(spans[1]).to.have.property('service', 'test')
+              expect(spans[1]).to.have.property('service', 'custom')
               expect(spans[1]).to.have.property('type', 'web')
               expect(spans[1]).to.have.property('resource', 'GET /api/hello/[name]')
               expect(spans[1]).to.have.property('error', 1)
+              expect(spans[1].meta).to.have.property('_dd.base_service', 'test')
               expect(spans[1].meta).to.have.property('span.kind', 'server')
               expect(spans[1].meta).to.have.property('http.method', 'GET')
               expect(spans[1].meta).to.have.property('http.status_code', '200')
