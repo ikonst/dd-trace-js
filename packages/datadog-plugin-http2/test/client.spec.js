@@ -100,6 +100,7 @@ describe('Plugin', () => {
             agent
               .use(traces => {
                 expect(traces[0][0]).to.have.property('service', SERVICE_NAME)
+                expect(traces[0][0]).not.to.to.have.property('_dd.base_service')
                 expect(traces[0][0]).to.have.property('type', 'http')
                 expect(traces[0][0]).to.have.property('resource', 'GET')
                 expect(traces[0][0].meta).to.have.property('span.kind', 'client')
@@ -697,6 +698,7 @@ describe('Plugin', () => {
             agent
               .use(traces => {
                 expect(traces[0][0]).to.have.property('service', 'custom')
+                expect(traces[0][0].meta).to.have.property('_dd.base_service', 'test')
               })
               .then(done)
               .catch(done)

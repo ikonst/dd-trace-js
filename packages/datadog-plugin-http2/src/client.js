@@ -111,6 +111,7 @@ class Http2ClientPlugin extends ClientPlugin {
 
   _onClose ({ span }) {
     this.tagPeerService(span)
+    this.tagBaseService(span)
     span.finish()
   }
 }
