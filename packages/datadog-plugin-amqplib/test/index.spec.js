@@ -16,25 +16,27 @@ describe('Plugin', () => {
         tracer = require('../../dd-trace')
       })
 
-      afterEach(() => {
-        connection.close()
-      })
-
       describe('without configuration', () => {
         beforeEach(done => {
-          require(`../../../versions/amqplib@${version}`).get('amqplib/callback_api')
-            .connect((err, conn) => {
-              connection = conn
+          agent.load('amqplib').then(() => {
+            require(`../../../versions/amqplib@${version}`).get('amqplib/callback_api')
+              .connect((err, conn) => {
+                connection = conn
 
-              if (err != null) {
-                return done(err)
-              }
+                if (err != null) {
+                  return done(err)
+                }
 
-              conn.createChannel((err, ch) => {
-                channel = ch
-                done(err)
+                conn.createChannel((err, ch) => {
+                  channel = ch
+                  done(err)
+                })
               })
-            })
+          })
+        })
+
+        afterEach(() => {
+          connection.close()
         })
 
         describe('without plugin', () => {
