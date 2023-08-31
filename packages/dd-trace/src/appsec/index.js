@@ -21,11 +21,14 @@ const { HTTP_CLIENT_IP } = require('../../../../ext/tags')
 const { block, setTemplates } = require('./blocking')
 const { passportTrackEvent } = require('./passport')
 const { storage } = require('../../../datadog-core')
+const { enablePlugins, disablePlugins } = require('./plugins')
+const ShellExecutionPlugin = require('./plugins/shell_execution')
 
 let isEnabled = false
 let config
+let shellExecutionPlugin
 
-function enable (_config) {
+function enable (_config, _tracer) {
   if (isEnabled) return
 
   try {
@@ -48,6 +51,10 @@ function enable (_config) {
     if (_config.appsec.eventTracking.enabled) {
       passportVerify.subscribe(onPassportVerify)
     }
+
+    enablePlugins(_tracer, _config)
+    // shellExecutionPlugin = new ShellExecutionPlugin(_tracer, _config)
+    // shellExecutionPlugin.configure({ enabled: true })
 
     isEnabled = true
     config = _config
@@ -194,6 +201,7 @@ function disable () {
   appsecTelemetry.disable()
 
   remoteConfig.disableWafUpdate()
+  disablePlugins()
 
   // Channel#unsubscribe() is undefined for non active channels
   if (bodyParser.hasSubscribers) bodyParser.unsubscribe(onRequestBodyParsed)
