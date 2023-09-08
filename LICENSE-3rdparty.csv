@@ -30,6 +30,7 @@ require,path-to-regexp,MIT,Copyright 2014 Blake Embrey
 require,protobufjs,BSD-3-Clause,Copyright 2016 Daniel Wirtz
 require,retry,MIT,Copyright 2011 Tim Koschützki Felix Geisendörfer
 require,semver,ISC,Copyright Isaac Z. Schlueter and Contributors
+require,shell-quote,mit,Copyright (c) 2013 James Halliday
 dev,@types/node,MIT,Copyright Authors
 dev,autocannon,MIT,Copyright 2016 Matteo Collina
 dev,axios,MIT,Copyright 2014-present Matt Zabriskie
