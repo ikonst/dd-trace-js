@@ -43,7 +43,7 @@ describe('Plugin', () => {
               expect(traces[0][0].meta).to.have.property('span.kind', 'client')
               expect(traces[0][0].meta).to.have.property('out.host', 'localhost')
               expect(traces[0][0].meta).to.have.property('network.destination.port', '11211')
-              expect(traces[0][0].meta).to.have.property('memcached.command', 'get test')
+              expect(traces[0][0].meta).to.have.property('memcached.command', 'get')
               expect(traces[0][0].meta).to.have.property('component', 'memcached')
             })
             .then(done)

@@ -14,7 +14,8 @@ class MemcachedPlugin extends CachePlugin {
       resource: query.type,
       type: 'memcached',
       meta: {
-        'memcached.command': query.command,
+        // a full query of "get mykey" is a command of simply "get"
+        'memcached.command': String(query.command).split(' ')[0],
         'out.host': address[0],
         [CLIENT_PORT_KEY]: address[1]
       }
